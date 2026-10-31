@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Polaroid from '../components/Polaroid.astro';
+import Doodle from '../components/Doodle.astro';
 ---
 
 <Base title="About" description="Alex Ainsworth: consumer product leader at Slingshot AI, previously Head of Product at Runna and first PM at Cleo AI. Also a former scuba instructor.">
@@ -21,8 +22,8 @@ import Polaroid from '../components/Polaroid.astro';
 
   <section class="section">
     <div class="wrap">
-      <h2>The logbook</h2>
-      <div class="stack logbook">
+      <h2>Where I've worked</h2>
+      <div class="stack career">
         <article class="card">
           <span class="when">2026 to now</span>
           <h3>Slingshot AI</h3>
@@ -77,6 +78,7 @@ import Polaroid from '../components/Polaroid.astro';
         <p>
           It taught me more about product than I expected. Explaining something complicated, clearly, to someone who is slightly panicking is most of the job. So is staying calm when the kit breaks, the weather turns and a boat full of backpackers is looking at you for a plan.
         </p>
+        <Doodle name="mask" size={72} class="card-doodle" />
         <span class="stamp blue">MSDT</span>
       </div>
       <div class="underwater-photo">
@@ -90,24 +92,29 @@ import Polaroid from '../components/Polaroid.astro';
       <h2>Off the clock</h2>
       <div class="stickies">
         <div class="sticky" style="--r: -2deg">
+          <Doodle name="terminal" size={52} />
           <h3>AI operating system</h3>
-          <p>I run my working life on a personal system I built in Claude Code. Either very efficient or a very elaborate way to procrastinate.</p>
+          <p>I run my personal life on a system I built in Claude Code. Either very efficient or a very elaborate way to procrastinate.</p>
         </div>
         <div class="sticky" style="--r: 1.5deg">
+          <Doodle name="d20" size={52} />
           <h3>Dungeon Master</h3>
           <p>I run a Dungeons &amp; Dragons campaign. Excellent training for stakeholder management.</p>
         </div>
         <div class="sticky" style="--r: -1deg">
+          <Doodle name="chilli" size={52} />
           <h3>Chillies and hot sauce</h3>
-          <p>I grow far too many chillies and turn them into hot sauce. Results vary. Mostly hot.</p>
+          <p>I grow far too many chillies and turn them into hot sauce. Results vary. Mostly edible.</p>
         </div>
         <div class="sticky" style="--r: 2deg">
+          <Doodle name="football" size={52} />
           <h3>Tottenham Hotspur</h3>
           <p>A lifelong lesson in managing expectations.</p>
         </div>
         <div class="sticky" style="--r: -1.5deg">
+          <Doodle name="plane" size={52} />
           <h3>Travel</h3>
-          <p>Somewhere a little unexpected, ideally. Favourites include Cuba, Japan, Ukraine and Northern Iraq.</p>
+          <p>Somewhere a little unexpected, ideally. Favourites so far: Cuba, Japan, Ukraine and Northern Iraq.</p>
         </div>
       </div>
     </div>
@@ -124,7 +131,7 @@ import Polaroid from '../components/Polaroid.astro';
     transform: rotate(-2.5deg);
   }
 
-  .logbook {
+  .career {
     max-width: 48rem;
     padding-top: 0.75rem;
   }
@@ -134,6 +141,18 @@ import Polaroid from '../components/Polaroid.astro';
     grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
     gap: 3rem;
     align-items: center;
+  }
+
+  .underwater :global(.card-doodle) {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.25rem;
+    transform: rotate(-8deg);
+    opacity: 0.9;
+  }
+
+  .underwater .card {
+    padding-bottom: 5.5rem;
   }
 
   .underwater .card h2 {
@@ -156,6 +175,11 @@ import Polaroid from '../components/Polaroid.astro';
     padding: 1.4rem 1.4rem 1.6rem;
     transform: rotate(var(--r));
     box-shadow: 0 14px 20px -14px rgba(20, 33, 61, 0.5);
+  }
+
+  .sticky :global(.doodle) {
+    display: block;
+    margin-bottom: 0.6rem;
   }
 
   .sticky h3 {

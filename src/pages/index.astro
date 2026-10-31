@@ -3,6 +3,7 @@ import { u } from '../lib/url';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Polaroid from '../components/Polaroid.astro';
+import Doodle from '../components/Doodle.astro';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -32,7 +33,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 
 
   <section class="section">
     <div class="wrap">
-      <h2>From the logbook</h2>
+      <h2>Where I've worked</h2>
       <div class="log-grid">
         <article class="card tilt-l">
           <span class="when">2026 to now</span>
@@ -57,6 +58,31 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 
           <h3>Cleo AI</h3>
           <p>First PM. Built the subscription product behind a $400m+ ARR business.</p>
           <span class="stamp">FIRST PM</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="writing-head">
+        <h2>Hackathon wins</h2>
+        <p class="note">two from two, not that I'm counting</p>
+      </div>
+      <div class="hack-grid">
+        <article class="card hack tilt-r">
+          <Doodle name="headphones" size={64} />
+          <span class="when">Strava hackathon</span>
+          <h3>A running coach that listens back</h3>
+          <p>Dynamic audio coaching that paces you to a 5K PB, using on-device LLMs that react to how your run is actually going rather than reading out a script.</p>
+          <span class="stamp">WINNER</span>
+        </article>
+        <article class="card hack tilt-l">
+          <Doodle name="bubbles" size={64} />
+          <span class="when">Slingshot AI hackathon</span>
+          <h3>Therapists as a growth channel</h3>
+          <p>A referral programme that gets licensed therapists recommending Ash to their clients, turning the people closest to the problem into the best way in.</p>
+          <span class="stamp">WINNER</span>
         </article>
       </div>
     </div>
@@ -117,6 +143,18 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 
     padding-top: 0.75rem;
   }
 
+  .hack-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.25rem 2rem;
+    padding-top: 0.75rem;
+  }
+
+  .hack :global(.doodle) {
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
   .writing-head {
     display: flex;
     align-items: baseline;
@@ -149,7 +187,8 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 
       max-width: 15rem;
     }
 
-    .log-grid {
+    .log-grid,
+    .hack-grid {
       grid-template-columns: 1fr;
     }
   }

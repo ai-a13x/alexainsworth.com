@@ -1,0 +1,110 @@
+---
+// Small marker-pen doodles, drawn as strokes so they match the handwritten notes.
+interface Props {
+  name: 'chilli' | 'd20' | 'mask' | 'plane' | 'terminal' | 'football' | 'trophy' | 'headphones' | 'bubbles';
+  size?: number;
+  class?: string;
+}
+
+const { name, size = 64, class: className } = Astro.props;
+---
+
+<svg
+  class:list={['doodle', className]}
+  width={size}
+  height={size}
+  viewBox="0 0 64 64"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="3.2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  {
+    name === 'chilli' && (
+      <>
+        <path d="M41 14c-4 9-7 22-16 31-5 5-12 7-16 5 9-4 12-11 15-19 3-8 7-15 17-17z" />
+        <path d="M41 14c2-3 5-5 9-5" />
+        <path d="M38 16c3 0 6 1 8 3" />
+      </>
+    )
+  }
+  {
+    name === 'd20' && (
+      <>
+        <path d="M32 6 55 19v26L32 58 9 45V19z" />
+        <path d="M32 6 20 40h24z" />
+        <path d="M9 19l11 21M55 19 44 40M20 40l12 18 12-18" />
+      </>
+    )
+  }
+  {
+    name === 'mask' && (
+      <>
+        <path d="M8 24c0-5 4-7 10-7h28c6 0 10 2 10 7v9c0 6-4 9-9 9-6 0-8-6-13-6s-7 6-13 6c-5 0-9-3-9-9z" />
+        <path d="M32 30v-8" />
+        <path d="M56 26c4 0 5 3 5 7v15c0 6-4 9-9 9h-6" />
+      </>
+    )
+  }
+  {
+    name === 'plane' && (
+      <>
+        <path d="M6 30 58 8 46 54 30 40z" />
+        <path d="M58 8 30 40v14l8-9" />
+      </>
+    )
+  }
+  {
+    name === 'terminal' && (
+      <>
+        <rect x="7" y="12" width="50" height="40" rx="5" />
+        <path d="M7 21h50" />
+        <path d="m17 32 7 5-7 5M29 43h12" />
+      </>
+    )
+  }
+  {
+    name === 'football' && (
+      <>
+        <circle cx="32" cy="32" r="24" />
+        <path d="m32 22 9 7-3 11H26l-3-11z" />
+        <path d="M32 22V9M41 29l12-4M38 40l7 10M26 40l-7 10M23 29l-12-4" />
+      </>
+    )
+  }
+  {
+    name === 'trophy' && (
+      <>
+        <path d="M20 8h24v14c0 9-5 16-12 16s-12-7-12-16z" />
+        <path d="M20 13H10c0 9 4 14 11 14M44 13h10c0 9-4 14-11 14" />
+        <path d="M32 38v9M22 56h20M25 47h14v9H25z" />
+      </>
+    )
+  }
+  {
+    name === 'headphones' && (
+      <>
+        <path d="M10 40V32a22 22 0 0 1 44 0v8" />
+        <rect x="8" y="38" width="11" height="17" rx="4" />
+        <rect x="45" y="38" width="11" height="17" rx="4" />
+      </>
+    )
+  }
+  {
+    name === 'bubbles' && (
+      <>
+        <path d="M8 14c0-4 3-6 7-6h22c4 0 7 2 7 6v12c0 4-3 6-7 6H22l-9 7v-7c-3 0-5-2-5-6z" />
+        <path d="M48 24h3c3 0 5 2 5 5v11c0 3-2 5-5 5v7l-8-7H32c-3 0-5-2-5-5v-3" />
+      </>
+    )
+  }
+</svg>
+
+<style>
+  .doodle {
+    color: var(--pen);
+    flex-shrink: 0;
+  }
+</style>
