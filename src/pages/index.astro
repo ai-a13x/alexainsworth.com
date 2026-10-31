@@ -1,0 +1,162 @@
+---
+import { u } from '../lib/url';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Polaroid from '../components/Polaroid.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 4);
+
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Base>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>I build consumer products people love.</h1>
+        <p class="note hero-note">and the odd one people love to complain about. Hi, I'm Alex.</p>
+        <p class="lede">
+          Product Lead at Slingshot AI, working on Ash, an AI built for mental health. Before that I ran product at Runna, was the first PM at Cleo AI, and took eighteen months off to travel, a year of it teaching scuba diving in Honduras.
+        </p>
+        <p class="lede">
+          I write about how the PM job is changing, startups, management, and the AI systems I build to make the work easier.
+        </p>
+      </div>
+      <div class="hero-photo">
+        <Polaroid caption="me, probably thinking about onboarding" tilt={3} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>From the logbook</h2>
+      <div class="log-grid">
+        <article class="card tilt-l">
+          <span class="when">2026 to now</span>
+          <h3>Slingshot AI</h3>
+          <p>Product Lead on Ash. Getting people from curious to coming back every day.</p>
+          <span class="stamp blue">NOW</span>
+        </article>
+        <article class="card">
+          <span class="when">2024 to 2026</span>
+          <h3>Runna</h3>
+          <p>Second PM in, Head of Product out. 100k to over a million subscribers.</p>
+          <span class="stamp">ACQUIRED BY STRAVA</span>
+        </article>
+        <article class="card tilt-r">
+          <span class="when">2022 to 2023</span>
+          <h3>Utila, Honduras</h3>
+          <p>Eighteen months travelling, a year of it as a scuba instructor. Hundreds certified, zero lost.</p>
+          <span class="stamp blue">SABBATICAL</span>
+        </article>
+        <article class="card tilt-l">
+          <span class="when">2019 to 2022</span>
+          <h3>Cleo AI</h3>
+          <p>First PM. Built the subscription product behind a $400m+ ARR business.</p>
+          <span class="stamp">FIRST PM</span>
+        </article>
+      </div>
+      <p class="ui more"><a href={u("/about/")}>The full logbook, and the bits that aren't on my CV</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="writing-head">
+        <h2>Latest writing</h2>
+        <p class="note">one longer post a month, if I behave</p>
+      </div>
+      <div class="card notebook">
+        <ul class="posts">
+          {posts.map((post) => (
+            <li>
+              <time datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
+              <a href={u(`/writing/${post.id}/`)}>{post.data.title}</a>
+              <p>{post.data.description}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding: clamp(2.5rem, 7vw, 5rem) 0 0;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  .hero-note {
+    margin: 1.25rem 0 2rem clamp(0rem, 12vw, 14rem);
+    transform: rotate(-3deg);
+    max-width: 26rem;
+  }
+
+  .hero .lede {
+    max-width: 36rem;
+  }
+
+  .hero-photo {
+    display: flex;
+    justify-content: center;
+  }
+
+  .log-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.25rem 2rem;
+    padding-top: 0.75rem;
+  }
+
+  .more {
+    margin-top: 2.25rem;
+    font-weight: 650;
+  }
+
+  .writing-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .writing-head .note {
+    font-size: 1.6rem;
+    transform: rotate(-2deg);
+    margin: 0 0 1.5rem;
+  }
+
+  .notebook {
+    max-width: 48rem;
+  }
+
+  @media (max-width: 820px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-photo {
+      order: -1;
+      justify-content: flex-start;
+      padding: 0.5rem 0 0 0.5rem;
+    }
+
+    .hero-photo :global(.polaroid) {
+      max-width: 15rem;
+    }
+
+    .log-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,77 @@
+---
+import { u } from '../lib/url';
+import '@fontsource-variable/bricolage-grotesque/standard.css';
+import '@fontsource-variable/source-serif-4/opsz.css';
+import '@fontsource-variable/source-serif-4/opsz-italic.css';
+import '@fontsource-variable/caveat/index.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const siteName = 'Alex Ainsworth';
+const {
+  title,
+  description = 'Alex Ainsworth builds consumer products people love. Product leader at Slingshot AI, previously Runna and Cleo AI. Writing about product, startups and building with AI.',
+} = Astro.props;
+const pageTitle = title ? `${title} | ${siteName}` : siteName;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const path = Astro.url.pathname.slice(base.length).replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => path.startsWith(href);
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={u("/favicon.svg")} />
+    <link rel="alternate" type="application/rss+xml" title="Alex Ainsworth: writing" href={u("/rss.xml")} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#f7f9fc" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="wordmark" href={u("/")}>Alex Ainsworth</a>
+        <nav class="nav" aria-label="Main">
+          <a href={u("/writing/")} aria-current={isCurrent('/writing') ? 'page' : undefined}>Writing</a>
+          <a href={u("/about/")} aria-current={isCurrent('/about') ? 'page' : undefined}>About</a>
+          <a href="#say-hello">Say hello</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer" id="say-hello">
+      <div class="wrap">
+        <div class="card hello">
+          <div>
+            <h2>Say hello</h2>
+            <p>I'm always up for speaking at events, coming on podcasts, and talking through a product problem you're stuck on. If something here was useful, or you think I've got it wrong, tell me.</p>
+            <div class="links">
+              <a href="mailto:alex.s.ainsworth@gmail.com">Email</a>
+              <a href="https://www.linkedin.com/in/alex-ainsworth-product/" rel="me">LinkedIn</a>
+              <a href={u("/rss.xml")}>RSS</a>
+            </div>
+          </div>
+          <p class="note" style="transform: rotate(-3deg); margin: 0;">I reply to everything. Eventually. Usually with too many follow-up questions.</p>
+          <span class="stamp blue">OPEN FOR A CHAT</span>
+        </div>
+        <p class="fineprint">© {new Date().getFullYear()} Alex Ainsworth</p>
+      </div>
+    </footer>
+  </body>
+</html>
