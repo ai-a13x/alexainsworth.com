@@ -16,7 +16,7 @@ The second is that I've had a lot of help over the years from people who wrote d
 
 - **The changing PM job.** What AI changes about product management, and what it doesn't.
 - **Product in startups.** The chaos, the leverage, and the things nobody warns you about when you're the first PM, or the tenth.
-- **Good PMs and good managers.** What I've learned from building and running product teams, including the mistakes.
+- **Good PMs and good managers.** What I've learned from building and leading product teams, including the mistakes.
 - **Building with AI.** The operating systems, loops and small tools I build to make the job easier, with enough detail that you can steal them.
 - **Builder culture.** Why I think every PM should be shipping something of their own.
 
