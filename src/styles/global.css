@@ -10,7 +10,7 @@
 
   --font-display: 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif;
   --font-ui: 'Bricolage Grotesque Variable', 'Helvetica Neue', Arial, sans-serif;
-  --font-hand: 'Caveat Variable', 'Comic Sans MS', cursive;
+  --font-hand: 'Permanent Marker', 'Comic Sans MS', cursive;
 
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
   --max: 76rem;
@@ -112,9 +112,9 @@ strong {
 .note {
   font-family: var(--font-hand);
   color: var(--pen);
-  font-size: 2rem;
-  line-height: 1.1;
-  font-weight: 500;
+  font-size: 1.375rem;
+  line-height: 1.3;
+  font-weight: 400;
 }
 
 /* Links: blue biro underline, highlighter on hover */
