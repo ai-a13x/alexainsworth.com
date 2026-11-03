@@ -2,8 +2,6 @@
 import { u } from '../lib/url';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import Polaroid from '../components/Polaroid.astro';
-import Doodle from '../components/Doodle.astro';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -14,75 +12,88 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 
 
 <Base>
   <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <h1>I build consumer products people love.</h1>
-        <p class="note hero-note">and that some people love to complain about. Hi, I'm Alex.</p>
-        <p class="lede">
-          Product Lead at Slingshot AI, working on Ash, an AI built for mental health. Before that I led product at Runna and was the first PM at Cleo AI, with a year of scuba diving in between.
-        </p>
-        <p class="lede">
-          I write about how the PM job is changing, startups, management, and the AI systems I build to make the work easier.
-        </p>
-      </div>
-      <div class="hero-photo">
-        <Polaroid caption="me, probably thinking about onboarding" tilt={3} />
+    <div class="wrap">
+      <h1>I build consumer products people love.</h1>
+      <div class="split lede">
+        <p>Product Lead at Slingshot AI, working on Ash, an AI built for mental health.</p>
+        <p>Before that I led product at Runna and was the first PM at Cleo AI, with a year of scuba diving in between.</p>
       </div>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap">
-      <h2>Where I've worked</h2>
-      <div class="log-grid">
-        <article class="card tilt-l">
-          <span class="when">2026 to now</span>
+      <div class="stats">
+        <div class="stat">
+          <span class="mono">Runna · 2024 to 2026</span>
+          <b>100k <span class="accent">→</span> 1m+</b>
+          <p>subscribers. Second PM in, Head of Product out. Acquired by Strava.</p>
+        </div>
+        <div class="stat">
+          <span class="mono">Cleo AI · 2019 to 2022</span>
+          <b>$400m<span class="accent">+</span></b>
+          <p>ARR business on the subscription product I built as first PM.</p>
+        </div>
+        <div class="stat">
+          <span class="mono">Utila · 2022 to 2023</span>
+          <b>0</b>
+          <p>divers lost in a year as a scuba instructor. Hundreds certified.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Where I've worked</h2>
+        <a class="mono" href={u('/about/')}>Full history →</a>
+      </div>
+      <ul class="rows">
+        <li class="row">
+          <span class="mono">2026 to now</span>
           <h3>Slingshot AI</h3>
           <p>Product Lead on Ash. Getting people from curious to coming back every day.</p>
-          <span class="stamp blue">NOW</span>
-        </article>
-        <article class="card">
-          <span class="when">2024 to 2026</span>
+          <span class="tag">Now</span>
+        </li>
+        <li class="row">
+          <span class="mono">2024 to 2026</span>
           <h3>Runna</h3>
           <p>Second PM in, Head of Product out. 100k to over a million subscribers.</p>
-          <span class="stamp">ACQUIRED BY STRAVA</span>
-        </article>
-        <article class="card tilt-r">
-          <span class="when">2022 to 2023</span>
+          <span class="tag">Acquired by Strava</span>
+        </li>
+        <li class="row">
+          <span class="mono">2022 to 2023</span>
           <h3>Utila, Honduras</h3>
-          <p>Eighteen months travelling, a year of it as a scuba instructor. Hundreds certified, zero lost.</p>
-          <span class="stamp blue">SABBATICAL</span>
-        </article>
-        <article class="card tilt-l">
-          <span class="when">2019 to 2022</span>
+          <p>Eighteen months travelling, a year of it as a scuba instructor.</p>
+          <span class="tag">Sabbatical</span>
+        </li>
+        <li class="row">
+          <span class="mono">2019 to 2022</span>
           <h3>Cleo AI</h3>
           <p>First PM. Built the subscription product behind a $400m+ ARR business.</p>
-          <span class="stamp">FIRST PM</span>
-        </article>
-      </div>
+          <span class="tag">First PM</span>
+        </li>
+      </ul>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap">
-      <div class="writing-head">
+      <div class="section-head">
         <h2>Hackathon wins</h2>
-        <p class="note">two from two, not that I'm counting</p>
+        <span class="mono">Two from two, not that I'm counting</span>
       </div>
-      <div class="hack-grid">
-        <article class="card hack tilt-r">
-          <Doodle name="headphones" size={64} />
-          <span class="when">Strava hackathon</span>
+      <div class="panels">
+        <article class="panel">
+          <span class="mono">Strava hackathon · <span class="accent">Winner</span></span>
           <h3>A running coach that listens back</h3>
           <p>Dynamic audio coaching that paces you to a 5K PB, using on-device LLMs that react to how your run is actually going rather than reading out a script.</p>
-          <span class="stamp">WINNER</span>
         </article>
-        <article class="card hack tilt-l">
-          <Doodle name="bubbles" size={64} />
-          <span class="when">Slingshot AI hackathon</span>
+        <article class="panel">
+          <span class="mono">Slingshot AI hackathon · <span class="accent">Winner</span></span>
           <h3>Therapists as a growth channel</h3>
           <p>A referral programme that gets licensed therapists recommending Ash to their clients, turning the people closest to the problem into the best way in.</p>
-          <span class="stamp">WINNER</span>
         </article>
       </div>
     </div>
@@ -90,105 +101,21 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 
 
   <section class="section">
     <div class="wrap">
-      <div class="writing-head">
+      <div class="section-head">
         <h2>Latest writing</h2>
+        <a class="mono" href={u('/writing/')}>All writing →</a>
       </div>
-      <div class="card notebook">
-        <ul class="posts">
-          {posts.map((post) => (
-            <li>
-              <time datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
+      <ul class="rows">
+        {posts.map((post) => (
+          <li class="post-row">
+            <time class="mono" datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
+            <div>
               <a href={u(`/writing/${post.id}/`)}>{post.data.title}</a>
               <p>{post.data.description}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 </Base>
-
-<style>
-  .hero {
-    padding: clamp(2.5rem, 7vw, 5rem) 0 0;
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
-    gap: clamp(2rem, 6vw, 5rem);
-    align-items: center;
-  }
-
-  .hero-note {
-    margin: 1.25rem 0 2rem clamp(0rem, 12vw, 14rem);
-    transform: rotate(-3deg);
-    max-width: 26rem;
-  }
-
-  .hero .lede {
-    max-width: 36rem;
-  }
-
-  .hero-photo {
-    display: flex;
-    justify-content: center;
-  }
-
-  .log-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2.25rem 2rem;
-    padding-top: 0.75rem;
-  }
-
-  .hack-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2.25rem 2rem;
-    padding-top: 0.75rem;
-  }
-
-  .hack :global(.doodle) {
-    display: block;
-    margin-bottom: 0.75rem;
-  }
-
-  .writing-head {
-    display: flex;
-    align-items: baseline;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .writing-head .note {
-    font-size: 1.125rem;
-    transform: rotate(-2deg);
-    margin: 0 0 1.5rem;
-  }
-
-  .notebook {
-    max-width: 48rem;
-  }
-
-  @media (max-width: 820px) {
-    .hero-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .hero-photo {
-      order: -1;
-      justify-content: flex-start;
-      padding: 0.5rem 0 0 0.5rem;
-    }
-
-    .hero-photo :global(.polaroid) {
-      max-width: 15rem;
-    }
-
-    .log-grid,
-    .hack-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>

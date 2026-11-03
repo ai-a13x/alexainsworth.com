@@ -4,32 +4,17 @@ import Base from '../layouts/Base.astro';
 ---
 
 <Base title="Page not found">
-  <section class="page">
+  <section class="hero">
     <div class="wrap">
-      <div class="card lost">
-        <h1>Nothing here.</h1>
-        <p class="lede">There's nothing at this address. Try the <a href={u("/")}>home page</a> or the <a href={u("/writing/")}>writing</a>.</p>
-        <span class="stamp">404</span>
-      </div>
+      <span class="mono">404</span>
+      <h1 class="title">Nothing here.</h1>
+      <p class="lede">There's nothing at this address. Try the <a href={u("/")}>home page</a> or the <a href={u("/writing/")}>writing</a>.</p>
     </div>
   </section>
 </Base>
 
 <style>
-  .page {
-    padding: clamp(3rem, 8vw, 6rem) 0 0;
-  }
-
-  .lost {
-    max-width: 44rem;
-  }
-
-  .lost h1 {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    margin-bottom: 1.25rem;
-  }
-
-  .lost .lede {
-    margin: 0;
+  .title {
+    margin: 1rem 0 1.5rem;
   }
 </style>

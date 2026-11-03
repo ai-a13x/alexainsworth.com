@@ -13,40 +13,37 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 
 <Base title="Writing" description="Alex Ainsworth on the changing product job, startups, management, and building with AI.">
   <section class="hero">
     <div class="wrap">
-      <h1>Writing</h1>
-      <p class="note head-note">thinking out loud, mostly about product</p>
-      <div class="narrow">
-        <p class="lede">
-          How the PM job is changing, being a PM in a startup, what good management looks like, and the AI systems I build to make the work easier. Follow along by <a href={u("/rss.xml")}>RSS</a> or on <a href="https://www.linkedin.com/in/alex-ainsworth-product/">LinkedIn</a>.
-        </p>
+      <span class="mono">Thinking out loud, mostly about product</span>
+      <h1 class="title">Writing</h1>
+      <p class="lede narrow">
+        How the PM job is changing, being a PM in a startup, what good management looks like, and the AI systems I build to make the work easier. Follow along by <a href={u("/rss.xml")}>RSS</a> or on <a href="https://www.linkedin.com/in/alex-ainsworth-product/">LinkedIn</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>All posts</h2>
+        <span class="mono">{posts.length} {posts.length === 1 ? 'post' : 'posts'}</span>
       </div>
-      <div class="card notebook">
-        <ul class="posts">
-          {posts.map((post) => (
-            <li>
-              <time datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
+      <ul class="rows">
+        {posts.map((post) => (
+          <li class="post-row">
+            <time class="mono" datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
+            <div>
               <a href={u(`/writing/${post.id}/`)}>{post.data.title}</a>
               <p>{post.data.description}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 </Base>
 
 <style>
-  .hero {
-    padding: clamp(2.5rem, 7vw, 5rem) 0 0;
-  }
-
-  .head-note {
-    margin: 0.75rem 0 1.75rem clamp(0rem, 8vw, 8rem);
-    transform: rotate(-2.5deg);
-  }
-
-  .notebook {
-    max-width: 48rem;
-    margin-top: 2.5rem;
+  .title {
+    margin: 1rem 0 1.75rem;
   }
 </style>

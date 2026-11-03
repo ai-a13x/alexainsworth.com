@@ -1,0 +1,58 @@
+---
+// A phone-framed app screenshot. Pass `src` (via u()) once the image is in /public; until then it shows a placeholder.
+interface Props {
+  src?: string;
+  alt?: string;
+  caption?: string;
+  width?: string;
+}
+
+const { src, alt = '', caption, width = '15rem' } = Astro.props;
+---
+
+<figure class="phoneshot" style={`--w: ${width}`}>
+  <div class="frame">
+    {
+      src ? (
+        <img src={src} alt={alt} loading="lazy" decoding="async" />
+      ) : (
+        <div class="placeholder" role="img" aria-label="Screenshot coming soon"><span class="mono">Screenshot</span></div>
+      )
+    }
+  </div>
+  {caption && <figcaption class="mono">{caption}</figcaption>}
+</figure>
+
+<style>
+  .phoneshot {
+    margin: 0;
+    width: min(100%, var(--w));
+  }
+
+  .frame {
+    border: 7px solid var(--ink);
+    border-radius: 2rem;
+    overflow: hidden;
+    aspect-ratio: 9 / 19.5;
+  }
+
+  img,
+  .placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e2e2df;
+  }
+
+  figcaption {
+    margin-top: 0.85rem;
+    text-align: center;
+  }
+</style>

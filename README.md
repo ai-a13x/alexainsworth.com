@@ -32,7 +32,7 @@ Then open http://localhost:4321.
 
 - `src/pages/` holds Home, Writing and About.
 - `src/layouts/Base.astro` holds the header and footer.
-- `src/components/Polaroid.astro` is the taped-on photo. Put photos in `public/` and pass `src`.
+- `src/components/Photo.astro` is a plain photo and `src/components/PhoneShot.astro` a phone-framed screenshot. Put images in `public/` and pass `src` via `u()`.
 - `src/styles/global.css` holds colours and type.
 
 ## Connecting alexainsworth.com

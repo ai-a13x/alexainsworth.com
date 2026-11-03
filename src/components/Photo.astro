@@ -1,0 +1,48 @@
+---
+// A plain photo with a mono caption. Pass `src` (via u()) once there's a photo in /public; until then it shows a placeholder.
+interface Props {
+  src?: string;
+  alt?: string;
+  caption?: string;
+  ratio?: string;
+}
+
+const { src, alt = 'Alex Ainsworth', caption, ratio = '4 / 5' } = Astro.props;
+---
+
+<figure class="photo" style={`--ratio: ${ratio}`}>
+  {
+    src ? (
+      <img src={src} alt={alt} loading="lazy" decoding="async" />
+    ) : (
+      <div class="placeholder" role="img" aria-label="Photo coming soon"><span class="mono">Photo</span></div>
+    )
+  }
+  {caption && <figcaption class="mono">{caption}</figcaption>}
+</figure>
+
+<style>
+  .photo {
+    margin: 0;
+  }
+
+  img,
+  .placeholder {
+    display: block;
+    width: 100%;
+    aspect-ratio: var(--ratio);
+    object-fit: cover;
+    border-radius: 4px;
+    background: var(--panel);
+  }
+
+  .placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  figcaption {
+    margin-top: 0.75rem;
+  }
+</style>
